@@ -18,5 +18,6 @@ It will also create a guacamole user:
 |vncuser|1|
 
 
+> Tested on Ubuntu 20.04 and Ubuntu 22.04
 
 

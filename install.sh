@@ -28,7 +28,7 @@ echo -e "     1- Requirements                          "
 echo -e "==========================================${NOCOLOR}\n"
 
 echo -e "${COLOR_GREEN}Installing requirements...${NOCOLOR}\n"
-sudo apt install -y gcc nano vim curl wget g++ libcairo2-dev libjpeg-turbo8-dev libpng-dev libtool-bin libossp-uuid-dev \
+sudo apt install -y ssh gcc nano vim curl wget g++ libcairo2-dev libjpeg-turbo8-dev libpng-dev libtool-bin libossp-uuid-dev \
 libavcodec-dev  libavformat-dev libavutil-dev libswscale-dev build-essential libpango1.0-dev libssh2-1-dev libvncserver-dev \
 libtelnet-dev libpulse-dev libvorbis-dev libwebp-dev
 
@@ -116,6 +116,12 @@ sudo systemctl enable vncserver@1.service
 sudo ufw allow 5901:5910/tcp
 sudo ufw reload
 
+echo "\n${COLOR_GREEN}Set VNC password (6 characters):${NOCOLOR}\n" 
+su - vncuser
+vncpasswd
+exit
+vncserver
+
 echo -e "\n${COLOR_BLUE}=========================================="
 echo -e "     4- Tomcat                           "
 echo -e "==========================================${NOCOLOR}\n"
@@ -148,7 +154,7 @@ echo '' >> /etc/systemd/system/tomcat.service
 echo 'User=tomcat' >> /etc/systemd/system/tomcat.service
 echo 'Group=tomcat' >> /etc/systemd/system/tomcat.service
 echo '' >> /etc/systemd/system/tomcat.service
-echo 'Environment="JAVA_HOME=/usr/lib/jvm/java-17-openjdk-${ARCH}"' >> /etc/systemd/system/tomcat.service
+echo 'Environment="JAVA_HOME=/usr/lib/jvm/java-17-openjdk-'${ARCH}'"' >> /etc/systemd/system/tomcat.service
 echo "Environment='JAVA_OPTS=-Djava.security.egd=file:///dev/urandom -Djava.awt.headless=true'" >> /etc/systemd/system/tomcat.service
 echo '' >> /etc/systemd/system/tomcat.service
 echo "Environment='CATALINA_BASE=/opt/tomcat/tomcatapp'" >> /etc/systemd/system/tomcat.service
