@@ -4,11 +4,18 @@
 ./install.sh`
 ```
 
--New computer user created = vncuser
--Default password = 1
+The installer will create a new computer user:
 
--New guacamole user created = vncuser
--Default password = 1
+|USER|PASS|
+|----|----|
+|vncuser|1|
+
+
+It will also create a guacamole user:
+
+|USER|PASS|
+|----|----|
+|vncuser|1|
 
 
 
