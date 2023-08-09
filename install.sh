@@ -201,11 +201,33 @@ sudo cp ${SCRIPTPATH}/guacamole-client-1.4.0/guacamole-1.4.0.war /etc/guacamole/
 sudo ln -sf /etc/guacamole/guacamole.war /opt/tomcat/tomcatapp/webapps/
 sudo touch /etc/guacamole/guacamole.properties
 sudo chmod 777 /etc/guacamole/guacamole.properties
+sudo chmod -R 777 /opt/tomcat/tomcatapp/webapps/guacamole
+
+# No-auth extension:
+sudo cp ${SCRIPTPATH}/guacamole-auth-noauth-1.4.0/guacamole-auth-noauth-1.4.0.jar /opt/tomcat/tomcatapp/webapps/guacamole/WEB-INF/lib/
+sudo cp ${SCRIPTPATH}/guacamole-auth-noauth-1.4.0/guacamole-auth-noauth-1.4.0.jar /etc/guacamole/extensions/
+sudo touch /etc/guacamole/noauth-config.xml
+sudo chmod 777 /etc/guacamole/noauth-config.xml
+echo '<configs>' > /etc/gacamole/noauth-config.xml
+echo '  <config name="vnc-free-access" protocol="vnc">' > /etc/guacamole/noauth-config.xml
+echo '    <param name="hostname" value="localhost" />' > /etc/guacamole/noauth-config.xml
+echo '    <param name="port" value="5901" />' > /etc/guacamole/noauth-config.xml
+echo '    <param name="password" value="YOUR VNC USER COMPUTER PASSWORD HERE" />' > /etc/guacamole/noauth-config.xml
+echo '  </config>' > /etc/guacamole/noauth-config.xml
+echo '</configs>' > /etc/guacamole/noauth-config.xml
 
 echo 'guacd-hostname: localhost' > /etc/guacamole/guacamole.properties
 echo 'guacd-port:     4822' >> /etc/guacamole/guacamole.properties
+echo ' ' >> /etc/guacamole/guacamole.properties
+echo '#UNCOMMENT THE FOLLOWING TO USE AUTH SYSTEM' >> /etc/guacamole/guacamole.properties
+echo '#------------------------------------------' >> /etc/guacamole/guacamole.properties
 echo 'user-mapping:   /etc/guacamole/user-mapping.xml' >> /etc/guacamole/guacamole.properties
 echo 'auth-provider:   net.sourceforge.guacamole.net.basic.BasicFileAuthenticationProvider' >> /etc/guacamole/guacamole.properties
+echo ' ' >> /etc/guacamole/guacamole.properties
+echo '#UNCOMMENT THE FOLLOWING TO NOT USING AUTH SYSTEM' >> /etc/guacamole/guacamole.properties
+echo '#------------------------------------------------' >> /etc/guacamole/guacamole.properties
+echo '#auth-provider: net.sourceforge.guacamole.net.auth.noauth.NoAuthenticationProvider' >> /etc/guacamole/guacamole.properties
+echo '#noauth-config: /etc/guacamole/noauth-config.xml' >> /etc/guacamole/guacamole.properties
 
 sudo ln -sf /etc/guacamole /opt/tomcat/tomcatapp/.guacamole 
 
@@ -246,4 +268,6 @@ echo '</user-mapping>' >> /etc/guacamole/user-mapping.xml
 
 sudo systemctl restart tomcat guacd
 
+
 echo -e "\n${COLOR_BLUE}The End...reboot computer to apply changes...${NOCOLOR}\n"
+echo -e "\n\n${COLOR_BLUE}If you don't want to use password access, modify /etc/guacamole/guacamole.properties and /etc/guacamole/noauth-config.xml. Then restart tomcat.${NOCOLOR}\n\n"
