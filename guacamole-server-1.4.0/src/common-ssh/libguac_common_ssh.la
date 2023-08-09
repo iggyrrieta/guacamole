@@ -17,7 +17,7 @@ old_library='libguac_common_ssh.a'
 inherited_linker_flags=''
 
 # Libraries that this one depends upon.
-dependency_libs=' -lssh2 /home/iggy/guacamole/guacamole-server-1.4.0/src/libguac/libguac.la -lcairo -ldl -ljpeg -lpng -lpthread -lssl -lcrypto -luuid -logg /usr/lib/aarch64-linux-gnu/libvorbis.la /usr/lib/aarch64-linux-gnu/libvorbisenc.la -lwebp'
+dependency_libs=' -lssh2 /home/kivnon/Documents/guacamole/guacamole-server-1.4.0/src/libguac/libguac.la -lcairo -ldl -ljpeg -lpng -lpthread -lssl -lcrypto -luuid -logg -lvorbis -lvorbisenc -lwebp'
 
 # Names of additional weak libraries provided by this library
 weak_library_names=''
@@ -39,4 +39,4 @@ dlpreopen=''
 
 # Directory that this library needs to be installed in:
 libdir=''
-relink_command="(cd /home/iggy/guacamole/guacamole-server-1.4.0/src/common-ssh; /bin/bash \"/home/iggy/guacamole/guacamole-server-1.4.0/libtool\"  --silent --tag CC --mode=relink gcc -Werror -Wall -pedantic -I../../src/common -I../../src/libguac -g -O2 -lpthread -lssh2 -lssl -lcrypto -o libguac_common_ssh.la libguac_common_ssh_la-buffer.lo libguac_common_ssh_la-dsa-compat.lo libguac_common_ssh_la-rsa-compat.lo libguac_common_ssh_la-sftp.lo libguac_common_ssh_la-ssh.lo libguac_common_ssh_la-key.lo libguac_common_ssh_la-user.lo ../../src/libguac/libguac.la @inst_prefix_dir@)"
+relink_command="(cd /home/kivnon/Documents/guacamole/guacamole-server-1.4.0/src/common-ssh; /bin/bash \"/home/kivnon/Documents/guacamole/guacamole-server-1.4.0/libtool\"  --silent --tag CC --mode=relink gcc -Werror -Wall -pedantic -I../../src/common -I../../src/libguac -g -O2 -lpthread -lssh2 -lssl -lcrypto -o libguac_common_ssh.la libguac_common_ssh_la-buffer.lo libguac_common_ssh_la-dsa-compat.lo libguac_common_ssh_la-rsa-compat.lo libguac_common_ssh_la-sftp.lo libguac_common_ssh_la-ssh.lo libguac_common_ssh_la-key.lo libguac_common_ssh_la-user.lo ../../src/libguac/libguac.la @inst_prefix_dir@)"

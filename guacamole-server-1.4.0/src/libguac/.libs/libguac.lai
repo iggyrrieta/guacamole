@@ -17,7 +17,7 @@ old_library='libguac.a'
 inherited_linker_flags=''
 
 # Libraries that this one depends upon.
-dependency_libs=' -lcairo -ldl -ljpeg -lpng -lpthread -lssl -lcrypto -luuid -logg /usr/lib/aarch64-linux-gnu/libvorbis.la /usr/lib/aarch64-linux-gnu/libvorbisenc.la -lwebp'
+dependency_libs=' -lcairo -ldl -ljpeg -lpng -lpthread -lssl -lcrypto -luuid -logg -lvorbis -lvorbisenc -lwebp'
 
 # Names of additional weak libraries provided by this library
 weak_library_names=''

@@ -116,10 +116,10 @@ sudo systemctl enable vncserver@1.service
 sudo ufw allow 5901:5910/tcp
 sudo ufw reload
 
-echo "\n${COLOR_GREEN}Set VNC password (6 characters):${NOCOLOR}\n" 
+echo -e "\n${COLOR_GREEN}Set VNC password (6 characters):${NOCOLOR}\n" 
 su - vncuser
 vncpasswd
-exit
+reset
 vncserver
 
 echo -e "\n${COLOR_BLUE}=========================================="
@@ -202,19 +202,21 @@ sudo ln -sf /etc/guacamole/guacamole.war /opt/tomcat/tomcatapp/webapps/
 sudo touch /etc/guacamole/guacamole.properties
 sudo chmod 777 /etc/guacamole/guacamole.properties
 sudo chmod -R 777 /opt/tomcat/tomcatapp/webapps/guacamole
+sudo mkdir /etc/guacamole/extensions/
+sudo chmod 777 /etc/guacamole/extensions/
 
 # No-auth extension:
 sudo cp ${SCRIPTPATH}/guacamole-auth-noauth-1.4.0/guacamole-auth-noauth-1.4.0.jar /opt/tomcat/tomcatapp/webapps/guacamole/WEB-INF/lib/
 sudo cp ${SCRIPTPATH}/guacamole-auth-noauth-1.4.0/guacamole-auth-noauth-1.4.0.jar /etc/guacamole/extensions/
 sudo touch /etc/guacamole/noauth-config.xml
 sudo chmod 777 /etc/guacamole/noauth-config.xml
-echo '<configs>' > /etc/gacamole/noauth-config.xml
-echo '  <config name="vnc-free-access" protocol="vnc">' > /etc/guacamole/noauth-config.xml
-echo '    <param name="hostname" value="localhost" />' > /etc/guacamole/noauth-config.xml
-echo '    <param name="port" value="5901" />' > /etc/guacamole/noauth-config.xml
-echo '    <param name="password" value="YOUR VNC USER COMPUTER PASSWORD HERE" />' > /etc/guacamole/noauth-config.xml
-echo '  </config>' > /etc/guacamole/noauth-config.xml
-echo '</configs>' > /etc/guacamole/noauth-config.xml
+echo '<configs>' > /etc/guacamole/noauth-config.xml
+echo '  <config name="vnc-free-access" protocol="vnc">' >> /etc/guacamole/noauth-config.xml
+echo '    <param name="hostname" value="localhost" />' >> /etc/guacamole/noauth-config.xml
+echo '    <param name="port" value="5901" />' >> /etc/guacamole/noauth-config.xml
+echo '    <param name="password" value="YOUR VNC USER COMPUTER PASSWORD HERE" />' >> /etc/guacamole/noauth-config.xml
+echo '  </config>' >> /etc/guacamole/noauth-config.xml
+echo '</configs>' >> /etc/guacamole/noauth-config.xml
 
 echo 'guacd-hostname: localhost' > /etc/guacamole/guacamole.properties
 echo 'guacd-port:     4822' >> /etc/guacamole/guacamole.properties
